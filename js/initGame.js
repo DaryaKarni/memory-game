@@ -3,12 +3,17 @@ import {renderCards} from "./renderCards.js";
 function initGame(){
   const header = document.createElement('header');
   header.classList.add('header');
+
   const gameButton = document.createElement('button');
-  gameButton.classList.add('header-button');
+  gameButton.classList.add('button');
   gameButton.dataset.action = 'start-game';
   gameButton.textContent = 'NEW GAME';
+  gameButton.addEventListener('click', () => {
+    renderCards();
+  });
+
   const tableButton = document.createElement('button');
-  tableButton.classList.add('header-button');
+  tableButton.classList.add('button');
   tableButton.dataset.action = 'open-table';
   tableButton.textContent = "LIDER'S TABLE";
   header.append(gameButton, tableButton);
