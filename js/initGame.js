@@ -1,0 +1,26 @@
+import {renderCards} from "./renderCards.js";
+
+function initGame(){
+  const header = document.createElement('header');
+  header.classList.add('header');
+  const gameButton = document.createElement('button');
+  gameButton.classList.add('header-button');
+  gameButton.dataset.action = 'start-game';
+  gameButton.textContent = 'NEW GAME';
+  const tableButton = document.createElement('button');
+  tableButton.classList.add('header-button');
+  tableButton.dataset.action = 'open-table';
+  tableButton.textContent = "LIDER'S TABLE";
+  header.append(gameButton, tableButton);
+  document.body.append(header);
+
+  const counter = document.createElement('p');
+  counter.classList.add('counter');
+  counter.textContent = '0 moves, 0 of 8 pairs';
+
+  const grid = document.createElement('div');
+  grid.classList.add('grid');
+  document.body.append(counter, grid);
+  renderCards();
+}
+initGame();
