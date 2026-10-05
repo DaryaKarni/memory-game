@@ -1,3 +1,4 @@
+import { openLiderTable } from "./liderTable.js";
 import {renderCards} from "./renderCards.js";
 
 function initGame(){
@@ -16,6 +17,10 @@ function initGame(){
   tableButton.classList.add('button');
   tableButton.dataset.action = 'open-table';
   tableButton.textContent = "LIDER'S TABLE";
+  tableButton.addEventListener('click', () => {
+    openLiderTable();
+  })
+  
   header.append(gameButton, tableButton);
   document.body.append(header);
 

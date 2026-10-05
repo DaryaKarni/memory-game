@@ -28,6 +28,7 @@ function randomize(array){
 
 let flippedCards = [];
 let isBoardLocked = false;
+let liders = [];
 export function renderCards(){
   const arrImages = randomize(images);
   const grid = document.querySelector('.grid');
@@ -80,6 +81,17 @@ export function renderCards(){
           }
         if(pairs === 8){
           openModalWin();
+          const date = new Date();
+          const formattedDate = date.toLocaleDateString('ru-RU', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+          });
+          liders.push({"moves": moves,
+              "date": formattedDate,
+            });
+          localStorage.setItem('liders', 
+            JSON.stringify(liders));
         }
       }
     })
@@ -117,14 +129,20 @@ function openModalWin(){
     document.body.removeChild(modalWrapper);
   });
 
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && modalWrapper){
+      document.body.removeChild(modalWrapper);
+    }
+  })
+  modalWrapper.addEventListener('click', (e) => {
+    if(modalWrapper && e.target === modalWrapper){
+      document.body.removeChild(modalWrapper);
+    }
+  });
   buttonsContainer.append(buttonNewGame, buttonClose);
   modal.append(winText, counterText, buttonsContainer);
   modalWrapper.append(modal);
   document.body.append(modalWrapper);
 
   document.documentElement.classList.add('no-scroll');
-}
-
-function startNewGame(){
-
 }
