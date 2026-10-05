@@ -127,16 +127,19 @@ function openModalWin(){
   buttonClose.classList.add('button');
   buttonClose.addEventListener('click', () => {
     document.body.removeChild(modalWrapper);
+    document.documentElement.classList.remove('no-scroll');
   });
 
   document.addEventListener('keydown', (e) => {
     if(e.key === 'Escape' && modalWrapper){
       document.body.removeChild(modalWrapper);
+      document.documentElement.classList.remove('no-scroll');
     }
   })
   modalWrapper.addEventListener('click', (e) => {
     if(modalWrapper && e.target === modalWrapper){
       document.body.removeChild(modalWrapper);
+      document.documentElement.classList.remove('no-scroll');
     }
   });
   buttonsContainer.append(buttonNewGame, buttonClose);
