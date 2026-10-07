@@ -1,0 +1,204 @@
+html, body {
+  box-sizing: border-box;
+  font-size: 16px;
+  background-color: rgb(236, 180, 108);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+body {
+  font-family: inherit;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  height: 5rem;
+  width: 100vw;
+  gap: 5vw;
+  font-family: inherit;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 0.06rem solid rgb(0, 0, 0);
+  padding: 1rem 0;
+}
+
+.button {
+  width: 12rem;
+  height: 3rem;
+  background-color: rgb(216, 132, 14);
+  color: rgb(0, 0, 0);
+  border: 0.06rem solid rgb(0, 0, 0);
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: medium;
+  cursor: pointer;
+}
+
+.counter {
+  font-size: 2rem;
+  margin: 0;
+  margin-top: 0.3rem;
+}
+
+.grid {
+  max-width: 50rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: 0.3rem;
+  margin: 1vw auto;
+}
+.grid .card {
+  width: 9rem;
+  aspect-ratio: 3/4;
+  perspective: 1000px;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  transition: transform 0.6s ease;
+  transform-style: preserve-3d;
+}
+.grid .card.flipped {
+  transform: rotateY(180deg);
+}
+.grid .card-back, .grid .card-front {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.5647058824);
+  padding: 0.5rem;
+  border: 0.06rem solid rgb(0, 0, 0);
+  border-radius: 1rem;
+  backface-visibility: hidden;
+}
+.grid .card-back {
+  background-color: rgb(216, 132, 14);
+}
+.grid .card-front {
+  background-color: rgb(216, 132, 14);
+  transform: rotateY(180deg);
+}
+.grid .card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.344);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5rem;
+  box-sizing: border-box;
+}
+.modal-wrapper.hidden {
+  display: none;
+  pointer-events: none;
+}
+.modal-wrapper .modal {
+  background-color: 236, 180, 108;
+  border-radius: 2rem;
+  border: 1rem solid rgb(216, 132, 14);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(236, 180, 108);
+  padding: 2rem 8vw;
+  gap: 1rem;
+}
+.modal-wrapper .modal .buttons-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.win-text, .lider-table-text {
+  font-size: 3rem;
+  font-family: inherit;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+}
+.win-text.hidden, .lider-table-text.hidden {
+  display: none;
+}
+
+.nolider-text, .counter-text {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 2px solid #000000;
+}
+.table th, .table td {
+  border: 0.01rem solid black;
+  justify-content: center;
+  text-align: left;
+  font-size: 1.2rem;
+}
+.table th {
+  background-color: rgb(216, 132, 14);
+  font-weight: bold;
+}
+.table th, .table td {
+  border-bottom: 1px solid #000000;
+  border-right: 1px solid #000000;
+  padding: 10px;
+}
+.table td:last-child, .table th:last-child {
+  border-right: none;
+}
+.table td:first-child, .table th:first-child {
+  border-left: none;
+}
+.table tr:last-child td {
+  border-bottom: none;
+}
+.table tr:last-child th {
+  border-top: none;
+}
+.table tbody tr:nth-child(even) {
+  background-color: rgb(236, 180, 108);
+}
+.table.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    gap: 0.5vw;
+    grid-template-columns: repeat(4, minmax(19vw, 1fr));
+  }
+  .grid .card {
+    width: 20vw;
+  }
+}/*# sourceMappingURL=main.css.map */
