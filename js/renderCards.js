@@ -1,4 +1,4 @@
-import { createLiderTable } from "./liderTable.js";
+import { createLiderTable, updateLiderTable } from "./liderTable.js";
 
 const images = [
   "./assets/apple.jpg", 
@@ -30,7 +30,6 @@ function randomize(array){
 
 let flippedCards = [];
 let isBoardLocked = false;
-let liders = [];
 export function renderCards(){
   const arrImages = randomize(images);
   const grid = document.querySelector('.grid');
@@ -89,11 +88,14 @@ export function renderCards(){
             month: '2-digit',
             year: 'numeric'
           });
+          let liders = JSON.parse(localStorage.getItem('liders')) ? JSON.parse(localStorage.getItem('liders'))
+          : [];
           liders.push({"moves": moves,
               "date": formattedDate,
             });
           localStorage.setItem('liders', 
             JSON.stringify(liders));
+          updateLiderTable();
         }
       }
     })

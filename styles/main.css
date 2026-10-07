@@ -143,55 +143,54 @@ body {
   text-align: center;
   margin: 0;
 }
+.win-text.hidden, .lider-table-text.hidden {
+  display: none;
+}
 
 .nolider-text, .counter-text {
   font-size: 2rem;
+  margin: 0;
 }
 
 .table {
-  border-collapse: collapse;
+  border-collapse: separate;
   border-spacing: 0;
   border-radius: 1rem;
   overflow: hidden;
-  border: 2px solid #333;
+  border: 2px solid #000000;
 }
-
-th, td {
+.table th, .table td {
   border: 0.01rem solid black;
-  padding: 10px 12px;
+  justify-content: center;
   text-align: left;
   font-size: 1.2rem;
 }
-
-th {
+.table th {
   background-color: rgb(216, 132, 14);
   font-weight: bold;
 }
-
-th, td {
+.table th, .table td {
   border-bottom: 1px solid #000000;
   border-right: 1px solid #000000;
   padding: 10px;
 }
-
-td:last-child, th:last-child {
+.table td:last-child, .table th:last-child {
   border-right: none;
 }
-
-td:first-child, th:first-child {
+.table td:first-child, .table th:first-child {
   border-left: none;
 }
-
-tr:last-child td {
+.table tr:last-child td {
   border-bottom: none;
 }
-
-tr:last-child th {
+.table tr:last-child th {
   border-top: none;
 }
-
-tbody tr:nth-child(even) {
+.table tbody tr:nth-child(even) {
   background-color: rgb(236, 180, 108);
+}
+.table.hidden {
+  display: none;
 }
 
 @media (max-width: 768px) {

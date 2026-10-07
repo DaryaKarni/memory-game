@@ -4,9 +4,10 @@ export function createLiderTable(){
   modalWrapper.classList.add('modal-wrapper', 'modal-table');
   const modal = document.createElement('div');
   modal.classList.add('modal');
-  const table = document.createElement('tabel');
-  table.classList.add('table');
+  const table = document.createElement('table');
+  table.classList.add('table', 'hidden');
   const thead = document.createElement('thead');
+  thead.classList.add('thead')
   const theadTr = document.createElement('tr');
   const th1 = document.createElement('th');
   th1.classList.add('th');
@@ -28,37 +29,12 @@ export function createLiderTable(){
   liderTableText.textContent = 'Lider table';
   modal.append(liderTableText);
 
-  const liders = JSON.parse(localStorage.getItem('liders'));
-  if(!liders){
-    const noLidersText = document.createElement('p');
-    noLidersText.classList.add('nolider-text');
-    noLidersText.textContent = 'No results. Play a game!';
-    modal.append(noLidersText);
-  } else{
-    liders.sort((a,b) => {
-      if(a.moves !== b.moves){
-        return a.moves - b.moves
-      }
-      return new Date(a.date) - new Date(b.date);
-    });
-    const slicedLiders = liders.length > 10 ? liders.slice(0, 10) : liders.slice();
-    for(const lider of slicedLiders){
-      const tr = document.createElement('tr');
-      const indexTd = document.createElement('td');
-      indexTd.textContent = String(slicedLiders.indexOf(lider) + 1);
-      tr.append(indexTd);
-      for(let key in lider){
-        if(lider.hasOwnProperty(key)){
-          const td = document.createElement('td');
-          String(lider[key]).replaceAll('-', '.');
-          td.textContent = String(lider[key]);
-          tr.append(td);
-        }
-      }
-      table.append(tr);
-    }
-    modal.append(table);
-  }
+  const noLidersText = document.createElement('p');
+  noLidersText.classList.add('nolider-text');
+  modal.append(noLidersText);
+
+  modal.append(table);
+
   const closeButton = document.createElement('button');
   closeButton.classList.add('button');
   closeButton.textContent = 'Close';
@@ -77,9 +53,11 @@ export function createLiderTable(){
   })
   modal.append(closeButton);
   modalWrapper.append(modal);
-  document.body.append(modalWrapper);
-  
+
   modalWrapper.classList.add('hidden');
+  document.body.append(modalWrapper);
+
+  updateLiderTable();
 }
 
 export function openLiderTable(){
@@ -89,7 +67,46 @@ export function openLiderTable(){
      document.documentElement.classList.add('no-scroll');
   }
 }
-
+export function updateLiderTable(){
+  const modalWrapper = document.querySelector('.modal-table');
+  const modal = modalWrapper.querySelector('.modal');
+  const table = modal.querySelector('.table');
+  table.replaceChildren(table.firstChild);
+  const noLidersText = document.querySelector('.nolider-text');
+  if(modalWrapper){
+    const liders = JSON.parse(localStorage.getItem('liders')) ? JSON.parse(localStorage.getItem('liders')) :
+    null;
+    if(!liders){
+      noLidersText.textContent = 'No results. Play a game!';
+    } else{
+      liders.sort((a,b) => {
+        if(a.moves !== b.moves){
+          return a.moves - b.moves
+        }
+        return new Date(a.date) - new Date(b.date);
+      });
+      const slicedLiders = liders.length > 10 ? liders.slice(0, 10) : liders.slice();
+      for(const lider of slicedLiders){
+        const tr = document.createElement('tr');
+        const indexTd = document.createElement('td');
+        indexTd.textContent = String(slicedLiders.indexOf(lider) + 1);
+        tr.append(indexTd);
+        for(let key in lider){
+          if(lider.hasOwnProperty(key)){
+            const td = document.createElement('td');
+            String(lider[key]).replaceAll('-', '.');
+            td.textContent = String(lider[key]);
+            tr.append(td);
+          }
+        }
+        noLidersText.classList.add('hidden');
+        table.classList.remove('hidden');
+        table.append(tr);
+      }
+      
+    }
+  }
+}
 function closeModalTable(){
   const modalWrapper = document.querySelector('.modal-table');
   if(modalWrapper){

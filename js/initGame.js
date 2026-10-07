@@ -14,7 +14,7 @@ function initGame(){
   tableButton.classList.add('button');
   tableButton.dataset.action = 'open-table';
   tableButton.textContent = "LIDER'S TABLE";
-  
+
   header.append(gameButton, tableButton);
   document.body.append(header);
 
@@ -40,6 +40,5 @@ function initGame(){
   tableButton.addEventListener('click', () => {
     openLiderTable();
   })
-  
 }
 initGame();
