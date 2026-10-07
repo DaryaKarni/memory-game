@@ -1,5 +1,5 @@
-import { openLiderTable } from "./liderTable.js";
-import {renderCards} from "./renderCards.js";
+import { openLiderTable, createLiderTable } from "./liderTable.js";
+import {createModalWin, renderCards} from "./renderCards.js";
 
 function initGame(){
   const header = document.createElement('header');
@@ -9,17 +9,11 @@ function initGame(){
   gameButton.classList.add('button');
   gameButton.dataset.action = 'start-game';
   gameButton.textContent = 'NEW GAME';
-  gameButton.addEventListener('click', () => {
-    renderCards();
-  });
-
+  
   const tableButton = document.createElement('button');
   tableButton.classList.add('button');
   tableButton.dataset.action = 'open-table';
   tableButton.textContent = "LIDER'S TABLE";
-  tableButton.addEventListener('click', () => {
-    openLiderTable();
-  })
   
   header.append(gameButton, tableButton);
   document.body.append(header);
@@ -31,6 +25,21 @@ function initGame(){
   const grid = document.createElement('div');
   grid.classList.add('grid');
   document.body.append(counter, grid);
+
+  
   renderCards();
+  
+  createModalWin();
+  
+  gameButton.addEventListener('click', () => {
+    renderCards();
+  });
+
+  createLiderTable();
+  
+  tableButton.addEventListener('click', () => {
+    openLiderTable();
+  })
+  
 }
 initGame();

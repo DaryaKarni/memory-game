@@ -1,3 +1,5 @@
+import { createLiderTable } from "./liderTable.js";
+
 const images = [
   "./assets/apple.jpg", 
   "./assets/bed.jpg", 
@@ -59,10 +61,10 @@ export function renderCards(){
       }
         flippedCards.push(card);
         card.classList.add('flipped');
-        moves++;
-        counter.textContent = `${moves} moves, ${pairs} of 8 pairs`;
         if(flippedCards.length === 2){
           isBoardLocked = true;
+          moves++;
+          counter.textContent = `${moves} moves, ${pairs} of 8 pairs`;
           const matched = flippedCards[0].dataset.name === flippedCards[1].dataset.name 
           ? true : false;
           if(matched){
@@ -99,7 +101,7 @@ export function renderCards(){
   }
 }
 
-function openModalWin(){
+export function createModalWin(){
   const modalWrapper = document.createElement('div');
   modalWrapper.classList.add('modal-wrapper');
   const modal = document.createElement('div');
@@ -119,6 +121,7 @@ function openModalWin(){
   buttonNewGame.textContent = 'NEW GAME'
   buttonNewGame.classList.add('button');
   buttonNewGame.addEventListener('click', () => {
+    closeModalWin();
     renderCards();
   });
 
@@ -126,20 +129,17 @@ function openModalWin(){
   buttonClose.textContent = 'CLOSE';
   buttonClose.classList.add('button');
   buttonClose.addEventListener('click', () => {
-    document.body.removeChild(modalWrapper);
-    document.documentElement.classList.remove('no-scroll');
+    closeModalWin();
   });
 
   document.addEventListener('keydown', (e) => {
     if(e.key === 'Escape' && modalWrapper){
-      document.body.removeChild(modalWrapper);
-      document.documentElement.classList.remove('no-scroll');
+      closeModalWin();
     }
   })
   modalWrapper.addEventListener('click', (e) => {
     if(modalWrapper && e.target === modalWrapper){
-      document.body.removeChild(modalWrapper);
-      document.documentElement.classList.remove('no-scroll');
+      closeModalWin();
     }
   });
   buttonsContainer.append(buttonNewGame, buttonClose);
@@ -147,5 +147,30 @@ function openModalWin(){
   modalWrapper.append(modal);
   document.body.append(modalWrapper);
 
-  document.documentElement.classList.add('no-scroll');
+  modalWrapper.classList.add('hidden');
+}
+function openModalWin(){
+  updateModalWin();
+  const modalWrapper = document.querySelector('.modal-wrapper');
+  if(modalWrapper){
+    modalWrapper.classList.remove('hidden');
+    document.documentElement.classList.add('no-scroll');
+  }
+}
+function updateModalWin(){
+  const modalWrapper = document.querySelector('.modal-wrapper');
+  if(modalWrapper){
+    const counter = document.querySelector('.counter');
+    if(counter){
+      const counterText = document.querySelector('.counter-text');
+      counterText.textContent = counter.textContent;
+    }
+  }
+}
+function closeModalWin(){
+  const modalWrapper = document.querySelector('.modal-wrapper');
+  if(modalWrapper){
+    modalWrapper.classList.add('hidden');
+    document.documentElement.classList.remove('no-scroll');
+  }
 }

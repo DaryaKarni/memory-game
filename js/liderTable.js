@@ -1,5 +1,5 @@
 
-export function openLiderTable(){
+export function createLiderTable(){
   const modalWrapper = document.createElement('div');
   modalWrapper.classList.add('modal-wrapper', 'modal-table');
   const modal = document.createElement('div');
@@ -78,11 +78,22 @@ export function openLiderTable(){
   modal.append(closeButton);
   modalWrapper.append(modal);
   document.body.append(modalWrapper);
-  document.documentElement.classList.add('no-scroll');
+  
+  modalWrapper.classList.add('hidden');
+}
+
+export function openLiderTable(){
+  const modalWrapper = document.querySelector('.modal-table');
+  if(modalWrapper){
+     modalWrapper.classList.remove('hidden');
+     document.documentElement.classList.add('no-scroll');
+  }
 }
 
 function closeModalTable(){
-  const modalWrapper = document.querySelector('.modal-wrapper.modal-table');
-  document.body.removeChild(modalWrapper);
-  document.documentElement.classList.remove('no-scroll');
+  const modalWrapper = document.querySelector('.modal-table');
+  if(modalWrapper){
+    modalWrapper.classList.add('hidden');
+     document.documentElement.classList.remove('no-scroll');
+  }
 }

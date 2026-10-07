@@ -110,6 +110,10 @@ body{
   justify-content: center;
   padding: 0 5rem;
   box-sizing: border-box;
+  &.hidden{
+    display: none;
+    pointer-events: none;
+  }
   .modal{
     background-color: (236, 180, 108);
     border-radius: 2rem;
